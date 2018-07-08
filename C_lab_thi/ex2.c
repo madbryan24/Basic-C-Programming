@@ -1,0 +1,147 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define MAX_PRODUCT 10
+#define MAX_TRANS 50
+void clear_buffer()
+{
+int ch;
+while ((ch=getchar()) !='\n' && ch!=EOF);
+}
+typedef struct
+{
+    char productName[30];
+    int quantity;
+    double price;
+}Product;
+typedef struct
+{
+    int productId;
+    int quantity;
+    double total;
+}TransactionDetail;
+int main()
+{
+    int i,nop,count=0,on;
+    char ch,add;
+    char search[30];
+    Product productlist[MAX_PRODUCT];
+    TransactionDetail translist[MAX_TRANS];
+    int choice;
+    do{
+    printf("MENU \n1. Input data: \n2. Insert data: \n3.View product information: \n4.Search by product name: \n5.Product payment \n6. Exit \n");
+    printf("please enter the function you want to execute: ");
+    scanf("%d",&choice);
+    while(choice!=1 && choice!=2 && choice!=3 && choice!=4 && choice!=5 && choice!=6)
+    {
+        printf("Wrong input, please try again \n");
+        printf("MENU \n1. Input data: \n2. Insert data: \n3.View product information: \n4.Search by product name: \n5.Product payment \n6. Exit \n");
+        printf("please enter the function you want to execute: ");
+        scanf("%d",&choice);
+    }
+
+    switch (choice)
+    {
+    case 1:
+        {
+            printf("please enter the number of products: ");
+            scanf("%d",&nop);
+            while(nop>10 || nop<0)
+            {
+                printf("Wrong input, please try again \n");
+                printf("please enter the number of products: ");
+                scanf("%d",&nop);
+            }
+            for(i=0;i<nop;i++)
+            {
+                clear_buffer();
+                printf("please enter information of product number %d \n",i+1);
+                printf("Name: ");
+                gets(productlist[i].productName);
+                printf("Quantity: ");
+                scanf("%d",&productlist[i].quantity);
+                while(productlist[i].quantity<0)
+                {
+                    printf("Wrong input, please try again \n");
+                    printf("Quantity: ");
+                    scanf("%d",&productlist[i].quantity);
+                }
+                printf("Price: ");
+                scanf("%lf",&productlist[i].price);
+                while(productlist[i].price<=0)
+                {
+                    printf("Wrong input, please try again \n");
+                    printf("Price: ");
+                    scanf("%lf",&productlist[i].price);
+                }
+            }
+        }
+
+        break;
+    case 2:
+        break;
+    case 3:
+        {
+            printf("%2c \t %30s \t %10s \t %5s \n",'#',"Product Name","Price","Qty");
+            for(i=0;i<nop;i++)
+            {
+                printf("%2d \t %30s \t %10lf \t %5d \n",i,productlist[i].productName,productlist[i].price,productlist[i].quantity);
+            }
+        }
+        break;
+    case 4:
+        {
+            clear_buffer();
+            printf("Please enter the product you want to find: ");
+            gets(search);
+            for(i=0;i<nop;i++)
+            {
+                if(strcmp(search,productlist[i].productName)==0)
+                    printf("%2d \t %30s \t %10lf \t %5d \n",i,productlist[i].productName,productlist[i].price,productlist[i].quantity);
+                else continue;
+            }
+        }
+        break;
+    case 5:
+        {
+            printf("please enter the order number of transaction: ");
+            scanf("%d",&on);
+            while(on<1 || on >50)
+            {
+                printf("Wrong input, please try again \n");
+                printf("please enter the order number of transaction: ");
+                scanf("%d",&on);
+            }
+            for(i=0;i<on;i++)
+            {
+            printf("please enter the order number of product: ");
+            scanf("%d",&translist[i].productId);
+            while(translist[i].productId<0 || translist[i].productId>=nop)
+            {
+                printf("Wrong input, please try again \n");
+                printf("please enter the order number of product: ");
+                scanf("%d",&translist[i].productId);
+            }
+            printf("please enter the quantity of product: ");
+            scanf("%d",&translist[i].quantity);
+            while(translist[i].quantity<0 || translist[i].productId>productlist[translist[i].productId].quantity)
+            {
+                printf("Wrong input, please try again \n");
+                printf("please enter the quantity of product: ");
+                scanf("%d",&translist[i].quantity);
+            }
+            translist[i].total=(double)(translist[i].quantity)*(productlist[translist[i].productId].price);
+            }
+            printf("the total of transaction 1 is: %lf \n",translist[i].total);
+
+        }
+        break;
+    case 6: exit(0);
+        break;
+    }
+    }while(choice!=6);
+
+
+
+    return 0;
+}

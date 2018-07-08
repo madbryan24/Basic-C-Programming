@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+printf("------------------------------------------------------\n");
+printf("|    TRƯỜNG ĐAI HỌC BÁCH KHOA HÀ NỘI		     |\n");
+printf("|            THẺ SINH VIÊN 		 	     |\n");
+printf("|----------------------------------------------------|\n");
+printf("| ------  MSSV: 20161706			     |\n");
+printf("| |    |  Họ tên: Nguyễn Vũ Hoàng		     |\n");
+printf("| |    |  Ngày sinh: 14/12/1998 NAM		     |\n");
+printf("| |    |  Hộ khẩu: Cầu Giấy - Hà Nội		     |\n");
+printf("| ------  Lớp: ICT.02				     |\n");
+printf("|         Khóa học: K61 Có giá trị đến: 31/08/2021   |\n");
+printf("| NPH 11/1/2016               |||||||||||||||||||||| |\n");
+printf("------------------------------------------------------\n");
+}
